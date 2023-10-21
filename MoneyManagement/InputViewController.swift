@@ -8,6 +8,10 @@
 import UIKit
 
 class InputViewController: UIViewController {
+    @IBOutlet weak var spendigTexrField: UITextField!
+    @IBOutlet weak var categoryTextField: UITextField!
+    
+    var task: Spending!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -108,6 +108,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Rfo-BF-w5A"/>
+                    <connections>
+                        <outlet property="categoryTextField" destination="5DB-HI-RdD" id="tfm-2k-qFJ"/>
+                        <outlet property="spendigTexrField" destination="Bq2-7M-cNS" id="QAn-NJ-0DI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ya-sp-aCS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

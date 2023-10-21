@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		61747A761943A59F61A78872 /* Pods_MoneyManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549B5CD6D9232DCC7846FC77 /* Pods_MoneyManagement.framework */; };
 		9AB305E82AE362D3001C267B /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB305E72AE362D3001C267B /* InputViewController.swift */; };
+		9AB305EA2AE3685D001C267B /* Spending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB305E92AE3685D001C267B /* Spending.swift */; };
 		9ACABD9A2AE3422E0044F4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACABD992AE3422E0044F4C9 /* AppDelegate.swift */; };
 		9ACABD9C2AE3422E0044F4C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACABD9B2AE3422E0044F4C9 /* SceneDelegate.swift */; };
 		9ACABD9E2AE3422E0044F4C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACABD9D2AE3422E0044F4C9 /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 		8C29A5988F3185ECCCB6BBD7 /* Pods-MoneyManagement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyManagement.debug.xcconfig"; path = "Target Support Files/Pods-MoneyManagement/Pods-MoneyManagement.debug.xcconfig"; sourceTree = "<group>"; };
 		96A55272BBB26B4A8243D699 /* Pods-MoneyManagement.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyManagement.release.xcconfig"; path = "Target Support Files/Pods-MoneyManagement/Pods-MoneyManagement.release.xcconfig"; sourceTree = "<group>"; };
 		9AB305E72AE362D3001C267B /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		9AB305E92AE3685D001C267B /* Spending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spending.swift; sourceTree = "<group>"; };
 		9ACABD962AE3422E0044F4C9 /* MoneyManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACABD992AE3422E0044F4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ACABD9B2AE3422E0044F4C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				9ACABDA22AE342310044F4C9 /* Assets.xcassets */,
 				9ACABDA42AE342310044F4C9 /* LaunchScreen.storyboard */,
 				9ACABDA72AE342310044F4C9 /* Info.plist */,
+				9AB305E92AE3685D001C267B /* Spending.swift */,
 			);
 			path = MoneyManagement;
 			sourceTree = "<group>";
@@ -91,7 +94,6 @@
 				8C29A5988F3185ECCCB6BBD7 /* Pods-MoneyManagement.debug.xcconfig */,
 				96A55272BBB26B4A8243D699 /* Pods-MoneyManagement.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -214,6 +216,7 @@
 				9ACABD9A2AE3422E0044F4C9 /* AppDelegate.swift in Sources */,
 				9ACABD9C2AE3422E0044F4C9 /* SceneDelegate.swift in Sources */,
 				9AB305E82AE362D3001C267B /* InputViewController.swift in Sources */,
+				9AB305EA2AE3685D001C267B /* Spending.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

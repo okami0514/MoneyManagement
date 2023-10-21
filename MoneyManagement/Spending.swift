@@ -1,8 +1,16 @@
-//
-//  Spending.swift
-//  MoneyManagement
-//
-//  Created by WEBSYSTEM-MAC29 on 2023/10/21.
-//
+import RealmSwift
 
-import Foundation
+class Spending: Object {
+    // 管理用 ID。プライマリーキー
+    @Persisted(primaryKey: true) var id: ObjectId
+
+    // 支出
+    @Persisted var spending = Int()
+
+    // カテゴリ
+    @Persisted var category = ""
+
+    // 日時
+    @Persisted var date = Date()
+
+}
