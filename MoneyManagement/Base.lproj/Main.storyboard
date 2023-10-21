@@ -40,14 +40,78 @@
                             <constraint firstItem="Mqm-n0-HQX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="giE-6Z-NaI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZUj-9b-sjT"/>
+                    <navigationItem key="navigationItem" id="ZUj-9b-sjT">
+                        <barButtonItem key="rightBarButtonItem" title="支出登録" id="YLO-l9-YTc">
+                            <connections>
+                                <segue destination="fI1-nO-Bxl" kind="show" id="5Jv-HS-3MO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Mqm-n0-HQX" id="Efe-Bu-Wph"/>
+                        <segue destination="fI1-nO-Bxl" kind="show" identifier="cellSegue" id="yki-Ia-w0P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1057.2519083969464" y="-28.169014084507044"/>
+        </scene>
+        <!--Input View Controller-->
+        <scene sceneID="jtS-X3-CwB">
+            <objects>
+                <viewController id="fI1-nO-Bxl" customClass="InputViewController" customModule="MoneyManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6nE-LX-97y">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支出額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNZ-O0-iOs">
+                                <rect key="frame" x="10" y="113" width="373" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bq2-7M-cNS">
+                                <rect key="frame" x="10" y="144" width="373" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGB-jl-NRq">
+                                <rect key="frame" x="10" y="188" width="373" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5DB-HI-RdD">
+                                <rect key="frame" x="10" y="219" width="373" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UmE-Ag-VdA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wNZ-O0-iOs" firstAttribute="leading" secondItem="UmE-Ag-VdA" secondAttribute="leading" constant="10" id="0oy-Pk-qwP"/>
+                            <constraint firstItem="wNZ-O0-iOs" firstAttribute="top" secondItem="UmE-Ag-VdA" secondAttribute="top" constant="10" id="Csk-7U-f03"/>
+                            <constraint firstItem="Bq2-7M-cNS" firstAttribute="leading" secondItem="UmE-Ag-VdA" secondAttribute="leading" constant="10" id="FG3-Ue-kpQ"/>
+                            <constraint firstItem="UmE-Ag-VdA" firstAttribute="trailing" secondItem="wNZ-O0-iOs" secondAttribute="trailing" constant="10" id="FfH-5b-dmM"/>
+                            <constraint firstItem="DGB-jl-NRq" firstAttribute="top" secondItem="Bq2-7M-cNS" secondAttribute="bottom" constant="10" id="GcA-Yg-xGS"/>
+                            <constraint firstItem="UmE-Ag-VdA" firstAttribute="trailing" secondItem="DGB-jl-NRq" secondAttribute="trailing" constant="10" id="SUU-0n-ejP"/>
+                            <constraint firstItem="Bq2-7M-cNS" firstAttribute="top" secondItem="wNZ-O0-iOs" secondAttribute="bottom" constant="10" id="VCa-0f-Hoy"/>
+                            <constraint firstItem="DGB-jl-NRq" firstAttribute="leading" secondItem="UmE-Ag-VdA" secondAttribute="leading" constant="10" id="WLw-bK-sw5"/>
+                            <constraint firstItem="5DB-HI-RdD" firstAttribute="top" secondItem="DGB-jl-NRq" secondAttribute="bottom" constant="10" id="YcW-Fh-mZP"/>
+                            <constraint firstItem="DGB-jl-NRq" firstAttribute="top" secondItem="Bq2-7M-cNS" secondAttribute="bottom" constant="10" id="ajl-70-jlO"/>
+                            <constraint firstItem="UmE-Ag-VdA" firstAttribute="trailing" secondItem="5DB-HI-RdD" secondAttribute="trailing" constant="10" id="dwn-cd-cnv"/>
+                            <constraint firstItem="5DB-HI-RdD" firstAttribute="leading" secondItem="UmE-Ag-VdA" secondAttribute="leading" constant="10" id="qm1-TE-7N8"/>
+                            <constraint firstItem="UmE-Ag-VdA" firstAttribute="trailing" secondItem="Bq2-7M-cNS" secondAttribute="trailing" constant="10" id="r55-KC-4b5"/>
+                            <constraint firstItem="Bq2-7M-cNS" firstAttribute="top" secondItem="wNZ-O0-iOs" secondAttribute="bottom" constant="10" id="sBQ-Tg-NYo"/>
+                            <constraint firstItem="5DB-HI-RdD" firstAttribute="top" secondItem="DGB-jl-NRq" secondAttribute="bottom" constant="10" id="xRv-Tb-Szi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Rfo-BF-w5A"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ya-sp-aCS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1829" y="-17"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pNo-fz-0lj">
@@ -69,6 +133,9 @@
             <point key="canvasLocation" x="130.53435114503816" y="-28.169014084507044"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="yki-Ia-w0P"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
