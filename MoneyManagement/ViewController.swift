@@ -85,13 +85,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // segue で画面遷移する時に呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        let inputViewController:InputViewController = segue.destination as! InputViewController
-        
-        if segue.identifier == "cellSegue" {
-            let indexPath = self.tableView.indexPathForSelectedRow
-            inputViewController.task = taskArray[indexPath!.row]
+        // ②Segueの識別子確認
+        if segue.identifier == "next" {
+            let viewController:ViewController = segue.destination as! ViewController
+        }else if segue.identifier == "back" {
+            let viewController:ViewController = segue.destination as! ViewController
         } else {
-            inputViewController.task = Spending()
+            let inputViewController:InputViewController = segue.destination as! InputViewController
+            
+            if segue.identifier == "cellSegue" {
+                let indexPath = self.tableView.indexPathForSelectedRow
+                inputViewController.task = taskArray[indexPath!.row]
+            } else {
+                inputViewController.task = Spending()
+            }
         }
     }
     

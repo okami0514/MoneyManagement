@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Mqm-n0-HQX">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <rect key="frame" x="0.0" y="303" width="393" height="466"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="G8v-qu-Uqj" detailTextLabel="26x-xy-AT8" style="IBUITableViewCellStyleSubtitle" id="gtI-ng-PvG">
@@ -59,9 +59,17 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ZUj-9b-sjT">
-                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="eyJ-lw-TTN"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="eyJ-lw-TTN">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="back" id="Z8T-cb-Ku8"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="play" id="KYf-Rm-cft"/>
+                            <barButtonItem systemItem="play" id="KYf-Rm-cft">
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="next" id="9Tf-bC-4el"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="支出登録" id="YLO-l9-YTc">
                                 <connections>
                                     <segue destination="fI1-nO-Bxl" kind="show" id="5Jv-HS-3MO"/>
@@ -161,7 +169,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yki-Ia-w0P"/>
+        <segue reference="5Jv-HS-3MO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
