@@ -5,7 +5,7 @@ class Spending: Object {
     @Persisted(primaryKey: true) var id: ObjectId
 
     // 支出
-    @Persisted var spending = Int()
+    @Persisted var spending = ""
 
     // カテゴリ
     @Persisted var category = ""
