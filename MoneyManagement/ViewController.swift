@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Realmインスタンスを取得する
     let realm = try! Realm()
     
-    //    let date = Date()
+    var date = Date()
     //    let calendar = Calendar.current
     //    let components = calendar.dateComponents([.year, .month], from: date)
     //    // 月初の日付を計算
@@ -88,6 +88,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // ②Segueの識別子確認
         if segue.identifier == "next" {
             let viewController:ViewController = segue.destination as! ViewController
+            
         }else if segue.identifier == "back" {
             let viewController:ViewController = segue.destination as! ViewController
         } else {
