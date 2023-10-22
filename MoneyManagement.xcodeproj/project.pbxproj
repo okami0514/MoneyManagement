@@ -11,6 +11,7 @@
 		9AB305E82AE362D3001C267B /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB305E72AE362D3001C267B /* InputViewController.swift */; };
 		9AB305EA2AE3685D001C267B /* Spending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB305E92AE3685D001C267B /* Spending.swift */; };
 		9AC10ECE2AE4BD940035B4D7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC10ECD2AE4BD940035B4D7 /* SettingViewController.swift */; };
+		9AC10ED02AE4C1550035B4D7 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC10ECF2AE4C1550035B4D7 /* Setting.swift */; };
 		9ACABD9A2AE3422E0044F4C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACABD992AE3422E0044F4C9 /* AppDelegate.swift */; };
 		9ACABD9C2AE3422E0044F4C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACABD9B2AE3422E0044F4C9 /* SceneDelegate.swift */; };
 		9ACABD9E2AE3422E0044F4C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACABD9D2AE3422E0044F4C9 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 		9AB305E72AE362D3001C267B /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		9AB305E92AE3685D001C267B /* Spending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spending.swift; sourceTree = "<group>"; };
 		9AC10ECD2AE4BD940035B4D7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		9AC10ECF2AE4C1550035B4D7 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		9ACABD962AE3422E0044F4C9 /* MoneyManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACABD992AE3422E0044F4C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ACABD9B2AE3422E0044F4C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		9ACABD8D2AE3422E0044F4C9 = {
 			isa = PBXGroup;
 			children = (
+				9AB305E72AE362D3001C267B /* InputViewController.swift */,
 				9ACABD982AE3422E0044F4C9 /* MoneyManagement */,
 				9ACABD972AE3422E0044F4C9 /* Products */,
 				F75EA36F0B2EF4FEF7CB5905 /* Pods */,
@@ -73,12 +76,12 @@
 				9ACABD9B2AE3422E0044F4C9 /* SceneDelegate.swift */,
 				9ACABD9D2AE3422E0044F4C9 /* ViewController.swift */,
 				9AC10ECD2AE4BD940035B4D7 /* SettingViewController.swift */,
-				9AB305E72AE362D3001C267B /* InputViewController.swift */,
 				9ACABD9F2AE3422E0044F4C9 /* Main.storyboard */,
 				9ACABDA22AE342310044F4C9 /* Assets.xcassets */,
 				9ACABDA42AE342310044F4C9 /* LaunchScreen.storyboard */,
 				9ACABDA72AE342310044F4C9 /* Info.plist */,
 				9AB305E92AE3685D001C267B /* Spending.swift */,
+				9AC10ECF2AE4C1550035B4D7 /* Setting.swift */,
 			);
 			path = MoneyManagement;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				9ACABD9A2AE3422E0044F4C9 /* AppDelegate.swift in Sources */,
 				9ACABD9C2AE3422E0044F4C9 /* SceneDelegate.swift in Sources */,
 				9AB305E82AE362D3001C267B /* InputViewController.swift in Sources */,
+				9AC10ED02AE4C1550035B4D7 /* Setting.swift in Sources */,
 				9AB305EA2AE3685D001C267B /* Spending.swift in Sources */,
 				9AC10ECE2AE4BD940035B4D7 /* SettingViewController.swift in Sources */,
 			);

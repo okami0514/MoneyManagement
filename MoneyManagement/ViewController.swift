@@ -21,7 +21,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //
     //    // 月末の日付を計算
     //    let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
-    var taskArray = try! Realm().objects(Spending.self).sorted(byKeyPath: "date", ascending: true)
+    var spendingArray = try! Realm().objects(Spending.self).sorted(byKeyPath: "date", ascending: true)
+    var settingArray = try! Realm().objects(Setting.self).sorted(byKeyPath: "date", ascending: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +33,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         setupNavigationBarTitle()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if settingArray.count == 0 {
+            let settingViewController = SettingViewController() // 新しいView Controllerをインスタンス化
+            self.present(settingViewController, animated: true, completion: nil)
+        }
+    }
+    
     private func setupNavigationBarTitle() {
         title = "目標金額:10000収入:500000残高:1111111支出合計:1111111支出詳細"
         navigationController?.navigationBar.prefersLargeTitles = true
-    
+        
         navigationItem.largeTitleDisplayMode = .always
     }
     
     // データの数（＝セルの数）を返すメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count
+        return spendingArray.count
     }
     
     // 各セルの内容を返すメソッド
@@ -50,7 +58,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         // Cellに値を設定する
-        let task = taskArray[indexPath.row]
+        let task = spendingArray[indexPath.row]
         cell.textLabel?.text = task.spending + " " + task.category
         
         let formatter = DateFormatter()
@@ -77,7 +85,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if editingStyle == .delete {
             // データベースから削除する
             try! realm.write {
-                self.realm.delete(self.taskArray[indexPath.row])
+                self.realm.delete(self.spendingArray[indexPath.row])
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
@@ -96,7 +104,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             if segue.identifier == "cellSegue" {
                 let indexPath = self.tableView.indexPathForSelectedRow
-                inputViewController.task = taskArray[indexPath!.row]
+                inputViewController.task = spendingArray[indexPath!.row]
             } else {
                 inputViewController.task = Spending()
             }
