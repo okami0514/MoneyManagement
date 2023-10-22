@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Mqm-n0-HQX">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="G8v-qu-Uqj" detailTextLabel="26x-xy-AT8" style="IBUITableViewCellStyleSubtitle" id="gtI-ng-PvG">
@@ -51,18 +51,25 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mqm-n0-HQX" secondAttribute="trailing" id="21F-vy-CXl"/>
+                            <constraint firstItem="Mqm-n0-HQX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="YE1-sO-QM5"/>
                             <constraint firstItem="Mqm-n0-HQX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ae5-sr-euB"/>
                             <constraint firstItem="Mqm-n0-HQX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eLv-wu-mq3"/>
                             <constraint firstItem="Mqm-n0-HQX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="giE-6Z-NaI"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="ZUj-9b-sjT">
-                        <barButtonItem key="rightBarButtonItem" title="支出登録" id="YLO-l9-YTc">
-                            <connections>
-                                <segue destination="fI1-nO-Bxl" kind="show" id="5Jv-HS-3MO"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="eyJ-lw-TTN"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="play" id="KYf-Rm-cft"/>
+                            <barButtonItem title="支出登録" id="YLO-l9-YTc">
+                                <connections>
+                                    <segue destination="fI1-nO-Bxl" kind="show" id="5Jv-HS-3MO"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="Mqm-n0-HQX" id="Efe-Bu-Wph"/>
                         <segue destination="fI1-nO-Bxl" kind="show" identifier="cellSegue" id="yki-Ia-w0P"/>

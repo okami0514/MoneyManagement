@@ -13,6 +13,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Realmインスタンスを取得する
     let realm = try! Realm()
     
+    //    let date = Date()
+    //    let calendar = Calendar.current
+    //    let components = calendar.dateComponents([.year, .month], from: date)
+    //    // 月初の日付を計算
+    //    let startOfMonth = calendar.date(from: components)!
+    //
+    //    // 月末の日付を計算
+    //    let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
     var taskArray = try! Realm().objects(Spending.self).sorted(byKeyPath: "date", ascending: true)
     
     override func viewDidLoad() {
@@ -21,6 +29,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.fillerRowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
+        setupNavigationBarTitle()
+    }
+    
+    private func setupNavigationBarTitle() {
+        title = "目標金額:10000収入:500000残高:1111111支出合計:1111111支出詳細"
+        navigationController?.navigationBar.prefersLargeTitles = true
+    
+        navigationItem.largeTitleDisplayMode = .always
     }
     
     // データの数（＝セルの数）を返すメソッド
