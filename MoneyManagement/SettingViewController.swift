@@ -11,7 +11,10 @@ import RealmSwift
 class SettingViewController: UIViewController {
     // Realmインスタンスを取得する
     let realm = try! Realm()
-
+    @IBOutlet weak var goalTextField: UITextField!
+    @IBOutlet weak var incomeTextField: UITextField!
+    @IBOutlet weak var registButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

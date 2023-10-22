@@ -14,15 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let realm = try! Realm()
     
     var date = Date()
-    //    let calendar = Calendar.current
-    //    let components = calendar.dateComponents([.year, .month], from: date)
-    //    // 月初の日付を計算
-    //    let startOfMonth = calendar.date(from: components)!
-    //
-    //    // 月末の日付を計算
-    //    let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
     var spendingArray = try! Realm().objects(Spending.self).sorted(byKeyPath: "date", ascending: true)
-    var settingArray = try! Realm().objects(Setting.self).sorted(byKeyPath: "date", ascending: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +26,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month], from: date)
+        // 月初の日付を計算
+        let startOfMonth = calendar.date(from: components)!
+        // 月末の日付を計算
+        let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
+        
+        var settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", startOfMonth, endOfMonth).sorted(byKeyPath: "date", ascending: true)
+        
         if settingArray.count == 0 {
             let settingViewController = SettingViewController() // 新しいView Controllerをインスタンス化
             self.present(settingViewController, animated: true, completion: nil)
