@@ -27,25 +27,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // 月初の日付を計算
         let startOfMonth = calendar.date(from: components)!
-        let currentStartOfMonth = calendar.date(byAdding: DateComponents(day: 1), to: startOfMonth)!
-        // 月末の日付を計算
-        let currentEndOfMonth = calendar.date(byAdding: DateComponents(month: 1), to: startOfMonth)!
+        // 翌月月初の日付を計算
+        let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: startOfMonth)!
+        // 翌月月初の日付を計算
+        let startOfNexNexttMonth = calendar.date(byAdding: DateComponents(month: 1), to: startOfNextMonth)!
+        // 先月月初の日付を計算
+        let startOfBackMonth = calendar.date(byAdding: DateComponents(month: -1), to: startOfMonth)!
         
-        //-----------------------------
-        // 前月計算
-        let backStartOfMonth = calendar.date(byAdding: DateComponents(month: -1, day: +1), to: startOfMonth)!
-        // 月末の日付を計算
-        let backEndOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: backStartOfMonth)!
-        //-----------------------------
-        
-        //-----------------------------
-        // 翌月を計算
-        let nextStartOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: +1), to: startOfMonth)!
-        // 月末の日付を計算
-        let nextEndOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: nextStartOfMonth)!
-        //-----------------------------
-        
-        let backSettingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", backStartOfMonth, backEndOfMonth).sorted(byKeyPath: "date", ascending: true)
+        let backSettingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date < %@", startOfBackMonth, startOfMonth).sorted(byKeyPath: "date", ascending: true)
         
         if backSettingArray.count == 0 {
             backButton.isHidden = true
@@ -53,7 +42,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             backButton.isHidden = false
         }
         
-        let nextSettingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", nextStartOfMonth, nextEndOfMonth).sorted(byKeyPath: "date", ascending: true)
+        let nextSettingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date < %@", startOfNextMonth, startOfNexNexttMonth).sorted(byKeyPath: "date", ascending: true)
         
         if nextSettingArray.count == 0 {
             nextButton.isHidden = true
@@ -61,7 +50,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             nextButton.isHidden = false
         }
         
-        let settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", currentStartOfMonth, currentEndOfMonth).sorted(byKeyPath: "date", ascending: true)
+        let settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date < %@", startOfMonth, startOfNextMonth).sorted(byKeyPath: "date", ascending: true)
         
         if settingArray.count == 0 {
             let settingViewController = self.storyboard?.instantiateViewController(withIdentifier: "Setting")
@@ -75,31 +64,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // 月初の日付を計算
         let startOfMonth = calendar.date(from: components)!
-        let currentStartOfMonth = calendar.date(byAdding: DateComponents(day: 1), to: startOfMonth)!
-        // 月末の日付を計算
-        let currentEndOfMonth = calendar.date(byAdding: DateComponents(month: 1), to: startOfMonth)!
+        // 翌月月初の日付を計算
+        let startOfNextMonth = calendar.date(byAdding: DateComponents(month: 1), to: startOfMonth)!
         
         // 目標取得
-        let settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", currentStartOfMonth, currentEndOfMonth).sorted(byKeyPath: "date", ascending: true)
+        let settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date < %@", startOfMonth, startOfNextMonth).sorted(byKeyPath: "date", ascending: true)
         
         let setting = settingArray[0]
         
         // 支出取得
-        let spendigArray = try! Realm().objects(Spending.self).filter("date >= %@ AND date <= %@", currentStartOfMonth, currentEndOfMonth).sorted(byKeyPath: "date", ascending: true)
+        let spendigArray = try! Realm().objects(Spending.self).filter("date >= %@ AND date < %@", startOfMonth, startOfNextMonth).sorted(byKeyPath: "date", ascending: true)
         
         var spendingNum : Int = 0
         if spendigArray.count != 0 {
             for spendigDate in spendigArray {
-                var spend = 0
-                if !spendigDate.spending.isEmpty {
-                    spend = Int(spendigDate.spending)
-                }
-                spendingNum += Int(spendigDate.spending)
+                spendingNum += Int(spendigDate.spending)!
             }
         }
         
-        let balance = 0
-
+        let balance = Int(setting.income)! - spendingNum
+        
         navigationItem.setTitleView(withTitle: "目標金額:\(String(setting.goal))", subTitile: "収入:\(String(setting.income)) " + "残高:\(balance) " + "支出合計:\(spendingNum)", subTitile2: "支出詳細")
         
         navigationItem.largeTitleDisplayMode = .always
@@ -187,14 +171,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 
 extension UINavigationItem {
-
+    
     func setTitleView(withTitle title: String, subTitile: String, subTitile2: String) {
-
+        
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = .boldSystemFont(ofSize: 17)
         titleLabel.textColor = .black
-
+        
         let subTitleLabel = UILabel()
         subTitleLabel.text = subTitile
         subTitleLabel.font = .systemFont(ofSize: 14)
@@ -204,12 +188,12 @@ extension UINavigationItem {
         subTitleLabel2.text = subTitile2
         subTitleLabel2.font = .systemFont(ofSize: 14)
         subTitleLabel2.textColor = .gray
-
+        
         let stackView = UIStackView(arrangedSubviews: [titleLabel, subTitleLabel, subTitleLabel2])
         stackView.distribution = .equalCentering
         stackView.alignment = .center
         stackView.axis = .vertical
-
+        
         self.titleView = stackView
     }
 }
