@@ -33,7 +33,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // 月末の日付を計算
         let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
         
-        var settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", startOfMonth, endOfMonth).sorted(byKeyPath: "date", ascending: true)
+        let settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", startOfMonth, endOfMonth).sorted(byKeyPath: "date", ascending: true)
         
         if settingArray.count == 0 {
             let settingViewController = self.storyboard?.instantiateViewController(withIdentifier: "Setting")
@@ -94,6 +94,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // segue で画面遷移する時に呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month], from: date)
+        // 前月計算
+        let startOfMonth = calendar.date(from: components)!
+        let backOfMonth = calendar.date(byAdding: DateComponents(month: -1, day: +1), to: startOfMonth)!
+        // 翌月を計算
+        let nextOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: +1), to: startOfMonth)!
         // ②Segueの識別子確認
         if segue.identifier == "next" {
             let viewController:ViewController = segue.destination as! ViewController
