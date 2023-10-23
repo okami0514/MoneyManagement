@@ -12,7 +12,8 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var goalTextField: UITextField!
     @IBOutlet weak var incomeTextField: UITextField!
     @IBOutlet weak var registButton: UIButton!
-
+    @IBOutlet weak var goalLavelField: UILabel!
+    
     // Realmインスタンスを取得する
     let realm = try! Realm()
     var task: Setting!
@@ -24,8 +25,9 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let today = Date()
+        let month = Calendar.current.component(.month, from: today)
+        self.goalLavelField.text = "\(month)月の目標設定"
     }
     
 

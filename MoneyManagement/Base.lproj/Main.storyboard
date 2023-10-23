@@ -91,6 +91,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="6wT-cT-7YV"/>
                     <connections>
+                        <outlet property="goalLavelField" destination="byd-KN-ZQ5" id="zaD-f9-erK"/>
                         <outlet property="goalTextField" destination="NJS-pG-cXa" id="tXz-zl-gnk"/>
                         <outlet property="incomeTextField" destination="sMn-jZ-Bum" id="HQh-Ta-jcw"/>
                         <outlet property="registButton" destination="h6J-6X-j5I" id="lHr-fk-g8V"/>
