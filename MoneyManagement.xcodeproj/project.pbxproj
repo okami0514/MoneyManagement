@@ -53,7 +53,6 @@
 		9ACABD8D2AE3422E0044F4C9 = {
 			isa = PBXGroup;
 			children = (
-				9AB305E72AE362D3001C267B /* InputViewController.swift */,
 				9ACABD982AE3422E0044F4C9 /* MoneyManagement */,
 				9ACABD972AE3422E0044F4C9 /* Products */,
 				F75EA36F0B2EF4FEF7CB5905 /* Pods */,
@@ -72,6 +71,7 @@
 		9ACABD982AE3422E0044F4C9 /* MoneyManagement */ = {
 			isa = PBXGroup;
 			children = (
+				9AB305E72AE362D3001C267B /* InputViewController.swift */,
 				9ACABD992AE3422E0044F4C9 /* AppDelegate.swift */,
 				9ACABD9B2AE3422E0044F4C9 /* SceneDelegate.swift */,
 				9ACABD9D2AE3422E0044F4C9 /* ViewController.swift */,

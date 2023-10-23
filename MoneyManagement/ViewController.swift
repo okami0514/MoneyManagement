@@ -36,9 +36,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", startOfMonth, endOfMonth).sorted(byKeyPath: "date", ascending: true)
         
         if settingArray.count == 0 {
-//            let settingViewController = SettingViewController() // 新しいView Controllerをインスタンス化
-//            self.present(settingViewController, animated: true, completion: nil)
-//            
             let settingViewController = self.storyboard?.instantiateViewController(withIdentifier: "Setting")
             self.present(settingViewController!, animated: true, completion: nil)
         }

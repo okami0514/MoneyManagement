@@ -9,11 +9,18 @@ import UIKit
 import RealmSwift
 
 class SettingViewController: UIViewController {
-    // Realmインスタンスを取得する
-    let realm = try! Realm()
     @IBOutlet weak var goalTextField: UITextField!
     @IBOutlet weak var incomeTextField: UITextField!
     @IBOutlet weak var registButton: UIButton!
+
+    // Realmインスタンスを取得する
+    let realm = try! Realm()
+    var task: Setting!
+    
+    @objc func dismissKeyboard(){
+        // キーボードを閉じる
+        view.endEditing(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +29,15 @@ class SettingViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func handleRegistButton(_ sender: Any) {
+        try! realm.write {
+            self.task.goal = self.goalTextField.text!
+            self.task.income = self.incomeTextField.text!
+            self.task.date = Date()
+            self.realm.add(self.task, update: .modified)
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
-    */
 
 }
