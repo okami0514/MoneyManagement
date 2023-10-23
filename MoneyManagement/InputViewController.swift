@@ -32,13 +32,36 @@ class InputViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        try! realm.write {
-            self.task.spending = self.spendigTexrField.text!
-            self.task.category = self.categoryTextField.text!
-            self.task.date = Date()
-            self.realm.add(self.task, update: .modified)
+        var regist = true
+        if Int(self.spendigTexrField.text!) == nil {
+            regist = false
         }
         
-        super.viewWillDisappear(animated)
+        if regist {
+            
+            try! realm.write {
+                self.task.spending = self.spendigTexrField.text!
+                self.task.category = self.categoryTextField.text!
+                self.task.date = Date()
+                self.realm.add(self.task, update: .modified)
+            }
+            
+            super.viewWillDisappear(animated)
+        } else {
+            // アラートを作成
+            let alertController = UIAlertController(
+                title: "入力値エラー",
+                message: "支出は数値のみ設定してください。",
+                preferredStyle: .alert
+            )
+            
+            // アクションボタンを追加
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            
+            // アラートを表示
+            present(alertController, animated: true, completion: nil)
+        }
+        
     }
 }

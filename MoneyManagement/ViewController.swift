@@ -1,15 +1,11 @@
-//
-//  ViewController.swift
-//  MoneyManagement
-//
-//  Created by WEBSYSTEM-MAC29 on 2023/10/21.
-//
-
 import UIKit
 import RealmSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var nextButton: UIBarButtonItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    
     // Realmインスタンスを取得する
     let realm = try! Realm()
     
@@ -28,12 +24,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidAppear(_ animated: Bool) {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month], from: date)
+        
         // 月初の日付を計算
         let startOfMonth = calendar.date(from: components)!
+        let currentStartOfMonth = calendar.date(byAdding: DateComponents(day: 1), to: startOfMonth)!
         // 月末の日付を計算
-        let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
+        let currentEndOfMonth = calendar.date(byAdding: DateComponents(month: 1), to: startOfMonth)!
         
-        let settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", startOfMonth, endOfMonth).sorted(byKeyPath: "date", ascending: true)
+        //-----------------------------
+        // 前月計算
+        let backStartOfMonth = calendar.date(byAdding: DateComponents(month: -1, day: +1), to: startOfMonth)!
+        // 月末の日付を計算
+        let backEndOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: backStartOfMonth)!
+        //-----------------------------
+        
+        //-----------------------------
+        // 翌月を計算
+        let nextStartOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: +1), to: startOfMonth)!
+        // 月末の日付を計算
+        let nextEndOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: nextStartOfMonth)!
+        //-----------------------------
+        
+        let backSettingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", backStartOfMonth, backEndOfMonth).sorted(byKeyPath: "date", ascending: true)
+        
+        if backSettingArray.count == 0 {
+            backButton.isHidden = true
+        } else {
+            backButton.isHidden = false
+        }
+        
+        let nextSettingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", nextStartOfMonth, nextEndOfMonth).sorted(byKeyPath: "date", ascending: true)
+        
+        if nextSettingArray.count == 0 {
+            nextButton.isHidden = true
+        } else {
+            nextButton.isHidden = false
+        }
+        
+        let settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", currentStartOfMonth, currentEndOfMonth).sorted(byKeyPath: "date", ascending: true)
         
         if settingArray.count == 0 {
             let settingViewController = self.storyboard?.instantiateViewController(withIdentifier: "Setting")

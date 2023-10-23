@@ -172,6 +172,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="eyJ-lw-TTN" id="rhD-sB-vsc"/>
+                        <outlet property="nextButton" destination="KYf-Rm-cft" id="hyh-NJ-jag"/>
                         <outlet property="tableView" destination="Mqm-n0-HQX" id="Efe-Bu-Wph"/>
                         <segue destination="fI1-nO-Bxl" kind="show" identifier="cellSegue" id="yki-Ia-w0P"/>
                     </connections>
