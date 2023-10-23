@@ -104,9 +104,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // ②Segueの識別子確認
         if segue.identifier == "next" {
             let viewController:ViewController = segue.destination as! ViewController
+            viewController.date = nextOfMonth
             
         }else if segue.identifier == "back" {
             let viewController:ViewController = segue.destination as! ViewController
+            viewController.date = backOfMonth
         } else {
             let inputViewController:InputViewController = segue.destination as! InputViewController
             
