@@ -70,11 +70,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     private func setupNavigationBarTitle() {
-        title = "目標金額:10000収入:500000残高:1111111支出合計:1111111支出詳細"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month], from: date)
+        
+        // 月初の日付を計算
+        let startOfMonth = calendar.date(from: components)!
+        let currentStartOfMonth = calendar.date(byAdding: DateComponents(day: 1), to: startOfMonth)!
+        // 月末の日付を計算
+        let currentEndOfMonth = calendar.date(byAdding: DateComponents(month: 1), to: startOfMonth)!
+        
+        // 目標取得
+        let settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date <= %@", currentStartOfMonth, currentEndOfMonth).sorted(byKeyPath: "date", ascending: true)
+        
+        let setting = settingArray[0]
+        
+        // 支出取得
+        let spendigArray = try! Realm().objects(Spending.self).filter("date >= %@ AND date <= %@", currentStartOfMonth, currentEndOfMonth).sorted(byKeyPath: "date", ascending: true)
+        
+        var spendingNum : Int = 0
+        if spendigArray.count != 0 {
+            for spendigDate in spendigArray {
+                var spend = 0
+                if !spendigDate.spending.isEmpty {
+                    spend = Int(spendigDate.spending)
+                }
+                spendingNum += Int(spendigDate.spending)
+            }
+        }
+        
+        let balance = 0
+
+        navigationItem.setTitleView(withTitle: "目標金額:\(String(setting.goal))", subTitile: "収入:\(String(setting.income)) " + "残高:\(balance) " + "支出合計:\(spendingNum)", subTitile2: "支出詳細")
         
         navigationItem.largeTitleDisplayMode = .always
     }
+    
     
     // データの数（＝セルの数）を返すメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -156,3 +186,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 }
 
+extension UINavigationItem {
+
+    func setTitleView(withTitle title: String, subTitile: String, subTitile2: String) {
+
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = .boldSystemFont(ofSize: 17)
+        titleLabel.textColor = .black
+
+        let subTitleLabel = UILabel()
+        subTitleLabel.text = subTitile
+        subTitleLabel.font = .systemFont(ofSize: 14)
+        subTitleLabel.textColor = .gray
+        
+        let subTitleLabel2 = UILabel()
+        subTitleLabel2.text = subTitile2
+        subTitleLabel2.font = .systemFont(ofSize: 14)
+        subTitleLabel2.textColor = .gray
+
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, subTitleLabel, subTitleLabel2])
+        stackView.distribution = .equalCentering
+        stackView.alignment = .center
+        stackView.axis = .vertical
+
+        self.titleView = stackView
+    }
+}
