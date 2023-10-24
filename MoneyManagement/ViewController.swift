@@ -70,21 +70,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // 目標取得
         let settingArray = try! Realm().objects(Setting.self).filter("date >= %@ AND date < %@", startOfMonth, startOfNextMonth).sorted(byKeyPath: "date", ascending: true)
         
-        let setting = settingArray[0]
-        
-        // 支出取得
-        let spendigArray = try! Realm().objects(Spending.self).filter("date >= %@ AND date < %@", startOfMonth, startOfNextMonth).sorted(byKeyPath: "date", ascending: true)
-        
-        var spendingNum : Int = 0
-        if spendigArray.count != 0 {
-            for spendigDate in spendigArray {
-                spendingNum += Int(spendigDate.spending)!
+        if settingArray.count != 0 {
+            let setting = settingArray[0]
+            // 支出取得
+            let spendigArray = try! Realm().objects(Spending.self).filter("date >= %@ AND date < %@", startOfMonth, startOfNextMonth).sorted(byKeyPath: "date", ascending: true)
+            
+            var spendingNum : Int = 0
+            if spendigArray.count != 0 {
+                for spendigDate in spendigArray {
+                    spendingNum += Int(spendigDate.spending)!
+                }
             }
+            
+            let balance = Int(setting.income)! - spendingNum
+            
+            navigationItem.setTitleView(withTitle: "目標金額:\(String(setting.goal))", subTitile: "収入:\(String(setting.income)) " + "残高:\(balance) " + "支出合計:\(spendingNum)", subTitile2: "支出詳細")
         }
-        
-        let balance = Int(setting.income)! - spendingNum
-        
-        navigationItem.setTitleView(withTitle: "目標金額:\(String(setting.goal))", subTitile: "収入:\(String(setting.income)) " + "残高:\(balance) " + "支出合計:\(spendingNum)", subTitile2: "支出詳細")
         
         navigationItem.largeTitleDisplayMode = .always
     }
