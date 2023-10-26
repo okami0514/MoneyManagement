@@ -85,12 +85,49 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             let balance = Int(setting.income)! - spendingNum
             
+            if (Int(setting.goal)! > balance) {
+                setNotification()
+            }
+            
             navigationItem.setTitleView(withTitle: "目標金額:\(String(setting.goal))", subTitile: "収入:\(String(setting.income)) " + "残高:\(balance) " + "支出合計:\(spendingNum)", subTitile2: "支出詳細")
         }
         
         navigationItem.largeTitleDisplayMode = .always
     }
     
+    // タスクのローカル通知を登録する --- ここから ---
+      func setNotification() {
+          let content = UNMutableNotificationContent()
+          content.title = "残高が目標金額以下になりました"
+          content.body = "目標未達成です"
+
+          content.sound = UNNotificationSound.default
+
+          // ローカル通知が発動するtrigger（日付マッチ）を作成
+          let day = Date()
+          let modifiedDate = Calendar.current.date(byAdding: .minute, value: 1, to: day)!
+          let calendar = Calendar.current
+          let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: modifiedDate)
+          let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+
+          // identifier, content, triggerからローカル通知を作成（identifierが同じだとローカル通知を上書き保存）
+          let request = UNNotificationRequest(identifier: String(1), content: content, trigger: trigger)
+
+          // ローカル通知を登録
+          let center = UNUserNotificationCenter.current()
+          center.add(request) { (error) in
+              print(error ?? "ローカル通知登録 OK")  // error が nil ならローカル通知の登録に成功したと表示します。errorが存在すればerrorを表示します。
+          }
+
+          // 未通知のローカル通知一覧をログ出力
+          center.getPendingNotificationRequests { (requests: [UNNotificationRequest]) in
+              for request in requests {
+                  print("/---------------")
+                  print(request)
+                  print("---------------/")
+              }
+          }
+      }
     
     // データの数（＝セルの数）を返すメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
