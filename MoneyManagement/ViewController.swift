@@ -1,5 +1,6 @@
 import UIKit
 import RealmSwift
+import UserNotifications
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
@@ -24,7 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidAppear(_ animated: Bool) {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month], from: date)
-        
+        setupNavigationBarTitle()
         // 月初の日付を計算
         let startOfMonth = calendar.date(from: components)!
         // 翌月月初の日付を計算
@@ -127,10 +128,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Delete ボタンが押された時に呼ばれるメソッド
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            // 削除するタスクを取得する
+            let task = self.spendingArray[indexPath.row]
+
+            // ローカル通知をキャンセルする
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: [String(task.id.stringValue)])
+            
             // データベースから削除する
             try! realm.write {
                 self.realm.delete(self.spendingArray[indexPath.row])
                 tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
+            // 未通知のローカル通知一覧をログ出力
+            center.getPendingNotificationRequests { (requests: [UNNotificationRequest]) in
+                for request in requests {
+                    print("/---------------")
+                    print(request)
+                    print("---------------/")
+                }
             }
         }
     }
